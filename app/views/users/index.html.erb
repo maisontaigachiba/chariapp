@@ -27,7 +27,10 @@
               <div class="media-content">
                 <div class="title"><%= link_to user.username, user_path(user) %></div>
               </div>
-            </div>                
+            </div>
+            <div class="content">
+              投稿数: <%= user.bikes.count %>
+            </div>
           </div>
         </div>
       <% end %>

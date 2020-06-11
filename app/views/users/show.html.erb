@@ -47,3 +47,52 @@
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @user.bikes.each do |bike| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= link_to bike_path(bike) do %>
+                  <%= attachment_image_tag bike, :image, fallback: "no-image.png" %>
+                <% end %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <%= link_to bike_path(bike), class: "panel-block" do %>
+                    <span class="panel-icon">
+                      <i class="fas fa-book" aria-hidden="true"></i>
+                    </span>
+                    この自転車を見る
+                  <% end %>
+                  <% if @user.id == current_user.id %>
+                    <%= link_to edit_bike_path(bike), class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      この自転車の詳細を編集する
+                    <% end %>
+                    <%= link_to bike_path(bike), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                      この自転車を削除する
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="content">
+                <time><%= bike.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
