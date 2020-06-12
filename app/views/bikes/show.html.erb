@@ -1,64 +1,43 @@
-<section class="hero is-success">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        自転車の詳細
-      </h1>
-    </div>
-  </div>
-</section>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-img-top">
+            <%= attachment_image_tag @bike, :image, size: "400x400" %>
+          </div>
+          <h5 class="card-title"><%= @bike.title %></h5>
+          <h6 class="card-subtitle">自転車のパーツ</h6>
+          <p class="card-text"><%= simple_format @bike.body %></p>
+          <p class="card-text">
+            <small class="text-muted">更新日:<%= @bike.updated_at.strftime("%Y-%m-%d") %></small>
+          </p>
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-7">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <%= attachment_image_tag @bike, :image %>
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-4"><%= @bike.title %></p>
-              </div>
-            </div>
-            <div class="content">
-              <table class="table is-narrow">
-                <tr>
-                  <th>自転車のパーツ</th>
-                </tr>
-                <tr>
-                  <td><%= simple_format @bike.body %></td>
-                </tr>
-              </table>
-              <% if @bike.user.id == current_user.id %>
-                <%= link_to "編集画面へ", edit_bike_path(@bike), class: "button is-success" %>
-              <% end %>
-            </div>
-          </div>
+          <% if @bike.user.id == current_user.id %>
+            <%= link_to "編集画面へ", edit_bike_path(@bike), class: "btn btn-success" %>
+            <%= link_to "削除する", bike_path(@bike), method: :delete, class: "btn btn-danger" %>
+          <% end %>
         </div>
       </div>
+    </div>
 
-      <div class="column is-4">
-        <article class="panel is-link">
-          <p class="panel-heading">
-            By <%= @bike.user.username %>
+    <div class="col-md-3">
+      <div class="card">
+        <h5 class="card-title">
+          <%= link_to @bike.user.username, user_path(@bike.user) %>
+        </h5>
+        <div class="card-block">
+          <p class="control">
+            <%= @bike.user.profile %>
           </p>
-          <div class="panel-block">
-            <p class="control">
-              <%= @bike.user.profile %>
-            </p>
-          </div>
-          <%= link_to user_path(@bike.user), class: "panel-block" do %>
-            <span class="panel-icon">
-              <i class="fas fa-user" aria-hidden="true"></i>
-            </span>
-            <%= @bike.user.username %>さんのページへ
-          <% end %>
-        </article>
+        </div>
+        <%= link_to user_path(@bike.user), class: "panel-block" do %>
+        <span class="card-icon">
+          <i class="fas fa-user" aria-hidden="true"></i>
+        </span>
+        <%= @bike.user.username %>さんのページへ
+      <% end %>
       </div>
     </div>
   </div>
-</section>
+</div>

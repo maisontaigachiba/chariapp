@@ -25,7 +25,7 @@ class BikesController < ApplicationController
 
   def edit
     @bike = Bike.find(params[:id])
-    if @bike.user != current_user
+    if @bike.user_id != current_user.id
       redirect_to bikes_path, alert: "アクセス権限がありません。"
     end
   end

@@ -1,0 +1,18 @@
+<%= form_for bike do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "自転車の車種", class: "label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body, "パーツ詳細", class: 'label' %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image, "写真", class: "label" %>
+    <%= f.attachment_field :image, class: "form-control" %>
+  </div>
+
+  <%= f.submit "投稿する", class: "btn btn-success" %>
+  <% end %>

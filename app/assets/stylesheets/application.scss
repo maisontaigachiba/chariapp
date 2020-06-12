@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
 
- @import "bulma";
  .notification:not(:last-child) {
    margin-bottom: 0; 
  }

@@ -1,12 +1,17 @@
-<section class="hero is-success">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        マイページ
-      </h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-7 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= current_user.username %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= current_user.email%></h6>
+          <%= link_to "編集", edit_user_path %>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
+
 
 <section class="section">
   <div class="container">
@@ -15,7 +20,7 @@
         <div class="columns is-centered">
           <div class="column is-4">
             <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
-              <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png", class: "profile_image is-rounded" %>
+              <%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no-image.png", class: "profile_image is-rounded" %>
             </figure>
           </div>
           <div class="column is-8">
@@ -57,7 +62,7 @@
             <div class="card-image">
               <figure class="image is-4by3">
                 <%= link_to bike_path(bike) do %>
-                  <%= attachment_image_tag bike, :image, fallback: "no-image.png" %>
+                  <%= attachment_image_tag bike, :image, size: "500x500", fallback: "no-image.png" %>
                 <% end %>
               </figure>
             </div>

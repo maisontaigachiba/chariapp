@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chariapp</title>
+    <title>CHARIAPP</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,10 +11,12 @@
   </head>
 
   <body>
+
     <% if flash[:notice]%>
-      <div class = "notification is-info">
-        <p class="notice"><%= notice %></p>
-      </div>
+      <div class="alert alert-primary" role="alert"><strong><%= notice %></strong></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-primary" role="alert"><strong><%= alert %></strong></div>
     <% end %>
 
     <% if flash[:alert] %>
@@ -22,64 +24,51 @@
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
-    <nav class="navbar is-warning">
-      <div class="navbar-brand">
-        <%= link_to root_path, class: "navbar-item" do %>
-          <h1 class="title is-4" style="font-family: roboto;">CHARIAPP</h1>
-        <% end %>
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "CHARIAPP", root_path, class: "navbar-brand chariapp" %>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
       <% if user_signed_in? %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-item">
-            <%= link_to "自転車一覧", bikes_path, class: "navbar-item button is-warning is-light" %>
-          </div>
-          <div class="navbar-item">
-            <%= link_to "新規投稿", new_bike_path, class: "navbar-item button is-warning is-light" %>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "サイクリスト一覧", users_path, class: "button is-warning is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
-                <p class="control">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div id="Navber" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <%= link_to "マイページ", user_path(current_user), class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規投稿", new_bike_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "自転車一覧", bikes_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "サイクリスト一覧", users_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          </ul>
         </div>
       <% else %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-item">
-            <%= link_to "自転車一覧", bikes_path, class: "navbar-item button is-warning is-light" %>
-          </div>
-          <div class="navbar-item">
-            <%= link_to "サイクリスト一覧", users_path, class: "navbar-item button is-warning is-light" %>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div id="Navber" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "自転車一覧", bikes_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "サイクリスト一覧", users_path, class: "nav-link" %>
+            </li>
+          </ul>
         </div>
       <% end %>
-
     </nav>
     <%= yield %>
   </body>

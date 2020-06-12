@@ -1,0 +1,10 @@
+<% if bike.errors.any? %>
+  <div class="alert alert-danter" role="alert">
+    <h4 class="alert-heading"><%= bike.errors.count %>個のエラーがあります。</h4>
+    <p class="mb-0">
+      <% bike.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </p>
+  </div>
+<% end %>
