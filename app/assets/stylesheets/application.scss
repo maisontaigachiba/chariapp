@@ -22,3 +22,10 @@
  .profile_image {
    border-radius: 50%;
  }
+
+ .main-image {
+   height: 500px;
+   background-image: url(bike.png);
+   background-repeat: no-repeat;
+   background-size: contain;
+ }

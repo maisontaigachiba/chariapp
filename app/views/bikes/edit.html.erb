@@ -8,6 +8,18 @@
   </div>
 </section>
 
+<% if @bike.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= @bike.errors.count %>個のエラーがあるため、更新できませんでした。</h2>
+    <ul>
+      <% @bike.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
