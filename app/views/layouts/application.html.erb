@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CHARIAPP</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/a549c7b881.js" crossorigin="anonymous"></script>
-  </head>
-
+  <%= render "layouts/head" %>
+  <%= render "layouts/shim" %>
   <body>
+    <%= render "layouts/header" %>
 
     <% if flash[:notice]%>
       <div class="alert alert-primary" role="alert"><strong><%= notice %></strong></div>
@@ -26,51 +18,10 @@
       </div>
     <% end %>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to 'CHARIAPP', root_path, class: "navbar-brand" %>
-      <button type="button" class="btn btn-primary navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <% if user_signed_in? %>
-        <div class="collapse navbar-collapse" id="Navber">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <%= link_to "マイページ", user_path(current_user), class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "新規投稿", new_bike_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "自転車一覧", bikes_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "サイクリスト一覧", users_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-            </li>
-          </ul>
-        </div>
-      <% else %>
-        <div id="Navber" class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "自転車一覧", bikes_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "サイクリスト一覧", users_path, class: "nav-link" %>
-            </li>
-          </ul>
-        </div>
-      <% end %>
-    </nav>
+    
     <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>

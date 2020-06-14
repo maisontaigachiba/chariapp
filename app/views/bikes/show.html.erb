@@ -1,10 +1,10 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-6 mx-auto">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body bike-show-card">
           <div class="card-img-top">
-            <%= attachment_image_tag @bike, :image, size: "400x400" %>
+            <%= attachment_image_tag @bike, :image, size: "400x400", class: "img-fluid" %>
           </div>
           <h5 class="card-title"><%= @bike.title %></h5>
           <h6 class="card-subtitle">自転車のパーツ</h6>
