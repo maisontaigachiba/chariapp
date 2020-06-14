@@ -6,7 +6,7 @@
           <tr>
             <th scope="col">自転車の車種</th>
             <th scope="col">投稿者</th>
-            <th scope="col">更新日</th>
+            <th scope="col"> </th>
           </tr>
         </thead>
         <tbody>
@@ -15,8 +15,8 @@
               <td>
                 <%= link_to bike_path(bike) do %>
                   <%= attachment_image_tag bike, :image, size: "500x500" %><br>
-                  <%= bike.title %>
-                <% end %><br>
+                  <%= bike.title %><br>
+                <% end %>
               </td>
               <td>
                 <%= link_to user_path(bike.user) do %>
@@ -25,7 +25,17 @@
                 <% end %>
               </td>
               <td>
-                <time><%= bike.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+                <% if current_user.already_favorited?(bike) %>
+                  <%= link_to bike_favorites_path(bike), method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>
+                  <%= bike.favorites.count %>
+                <% else %>
+                  <%= link_to bike_favorites_path(bike), method: :post do %>
+                    <i class="far fa-heart"></i>
+                  <% end %>
+                  <%= bike.favorites.count %>
+                <% end %>
               </td>
             </tr>
           <% end %>
