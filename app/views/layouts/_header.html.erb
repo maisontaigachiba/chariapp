@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <%= link_to 'CHARIAPP', bikes_path, class: "navbar-brand" %>
     <%= link_to "マイページ", user_path(current_user), class: "navbar-brand nav-item" %>
 
@@ -26,7 +26,7 @@
     </div>
   </nav>
 <% else %>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <%= link_to 'CHARIAPP', root_path, class: "navbar-brand" %>
 

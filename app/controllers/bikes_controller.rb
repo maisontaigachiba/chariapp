@@ -17,7 +17,7 @@ class BikesController < ApplicationController
     @bike = Bike.new(bike_params)
     @bike.user_id = current_user.id
     if @bike.save
-      redirect_to bike_path(@bike), notice: "投稿しました。"
+      redirect_to bike_path(@bike), notice: "投稿しました"
     else
       render :new
     end
@@ -26,14 +26,14 @@ class BikesController < ApplicationController
   def edit
     @bike = Bike.find(params[:id])
     if @bike.user_id != current_user.id
-      redirect_to bikes_path, alert: "アクセス権限がありません。"
+      redirect_to bikes_path, alert: "アクセス権限がありません"
     end
   end
 
   def update
     @bike = Bike.find(params[:id])
     if @bike.update(bike_params)
-      redirect_to bike_path(@bike), notice: "更新しました。"
+      redirect_to bike_path(@bike), notice: "更新しました"
     else
       render :edit
     end
