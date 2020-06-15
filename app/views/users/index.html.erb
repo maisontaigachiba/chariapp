@@ -2,20 +2,22 @@
   <div class="row justify-content-center">
     <h3 class="h3">サイクリスト一覧</h3>
   </div>
-  <div class="row w-100 mt-5">
-    <div class="col-md-10 col-md-offset-1">
-      <% @users.each do |user| %>
-        <ul class="list-group mt-3">
-          <li class="list-group-item border-0">
-            <%= link_to user_path(user) do %>
-              <%= attachment_image_tag user, :profile_image, fallback: "no-image.png",size: "150x150", class: "ml-5" %>
-            <% end %>
-            <%= link_to user.username, user_path(user), class: "ml-5 " %>
-            <span class="ml-5"><%= user.profile %></span>
-            <span class="ml-5">投稿数: <%= user.bikes.count %></span>
-          </li>
-        </ul>
-      <% end %>
+  <% @users.each do |user| %>
+    <div class="row mt-5 justify-content-center mx-auto">
+      <div class="col-lg-2 col-md-6 order-md-1 mx-auto text-center">
+        <%= link_to user_path(user) do %>
+          <%= attachment_image_tag user, :profile_image, fallback: "no-image.png",size: "150x150", class: "mx-auto" %>
+        <% end %>
+      </div>
+      <div class="col-lg-2 col-md-6 order-md-3 mx-auto text-center">
+        <%= link_to user.username, user_path(user) %>
+      </div>
+      <div class="col-lg-6 col-md-6 order-md-2 mx-auto text-center">
+        <%= user.profile %>
+      </div>
+      <div class="col-lg-2 col-md-6 order-md-4 mx-auto text-center">
+        投稿数: <%= user.bikes.count %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
