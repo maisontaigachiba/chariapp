@@ -1,9 +1,12 @@
 <div class="container mt-5">
   <div class="row">
+    <div class="col-10 mx-auto">
+      <%= render "devise/shared/error_messages", class: "text-center", resource: resource %>
+    </div>
     <div class="col-6 mx-auto">
       <h2>新規登録</h2>
+
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-group">
         <%= f.label :username, "ユーザーネーム" %>
