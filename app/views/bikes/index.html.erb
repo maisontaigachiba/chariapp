@@ -16,15 +16,20 @@
         <%= link_to bike.user.username, user_path(bike.user) %>
       </div>
       <div class="col-lg-2 col-md-6 order-md-4 mb-2 d-flex justify-content-center align-items-center">
-        <% if current_user.already_favorited?(bike) %>
-          <%= link_to bike_favorites_path(bike), method: :delete do %>
-            <i class="fas fa-heart"></i>
+        <% if user_signed_in? %>
+          <% if current_user.already_favorited?(bike) %>
+            <%= link_to bike_favorites_path(bike), method: :delete do %>
+              <i class="fas fa-heart mr-2"></i>
+            <% end %>
+            <%= bike.favorites.count %>
+          <% else %>
+            <%= link_to bike_favorites_path(bike), method: :post do %>
+              <i class="far fa-heart mr-2"></i>
+            <% end %>
+            <%= bike.favorites.count %>
           <% end %>
-          <%= bike.favorites.count %>
         <% else %>
-          <%= link_to bike_favorites_path(bike), method: :post do %>
-            <i class="far fa-heart"></i>
-          <% end %>
+          <i class="fas fa-heart mr-2"></i>
           <%= bike.favorites.count %>
         <% end %>
       </div>
