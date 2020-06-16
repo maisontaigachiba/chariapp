@@ -1,15 +1,15 @@
 <% if user_signed_in? %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <%= link_to 'CHARIAPP', bikes_path, class: "navbar-brand" %>
-    <%= link_to "マイページ", user_path(current_user), class: "navbar-brand nav-item" %>
+    <%= link_to current_user.username, user_path(current_user), class: "navbar-brand ml-auto nav-item" %>
 
 
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="Navber">
-      <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse ml-auto" id="Navber">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <%= link_to "新規投稿", new_bike_path, class: "nav-link" %>
         </li>
@@ -26,24 +26,21 @@
     </div>
   </nav>
 <% else %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <%= link_to 'CHARIAPP', root_path, class: "navbar-brand" %>
-
-      <%= link_to "ログイン", new_user_session_path, class: "nav-item btn btn-outline-primary" %>
-
-      <%= link_to "新規登録", new_user_registration_path, class: "nav-item btn btn-outline-success ml-2" %>
+    <%= link_to "ログイン", new_user_session_path, class: "ml-auto nav-item btn btn-outline-primary" %>
+    <%= link_to "新規登録", new_user_registration_path, class: "nav-item btn btn-outline-success mx-4" %>
 
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="Navber" class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse ml-auto" id="Navber">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link d-lg-none" %>
         </li>
         <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link d-lg-none" %>
         </li>
         <li class="nav-item">
           <%= link_to "自転車一覧", bikes_path, class: "nav-link" %>

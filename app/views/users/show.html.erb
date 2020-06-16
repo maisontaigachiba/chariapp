@@ -1,103 +1,72 @@
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-7 mx-auto">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= current_user.username %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= current_user.email%></h6>
-          <%= link_to "編集", edit_user_path %>
-        </div>
+  <% if @user.id == current_user.id %>
+    <div class="row justify-content-center">
+      <h3>マイページ</h3>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-4 mb-2 d-flex justify-content-center align-items-center">
+      <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size: "150x150", class: "mb-2" %>
+      </div>
+      <div class="col-md-4 mb-2 d-flex justify-content-center align-items-center">
+        <%= @user.username %>
+      </div>
+      <div class="col-md-4 mb-2 d-flex justify-content-center align-items-center">
+        <%= @user.email %>
+      </div>
+      <div class="col-md-6 offset-md-4 mb-2 d-flex justify-content-center align-items-center">
+        <%= @user.profile %>
+      </div>
+      <div class="col-md-2 mb-2 d-flex justify-content-center align-items-center">
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-success" %>
       </div>
     </div>
+  <% else %>
+    <div class="row justify-content-center">
+      <h3 class="h3">ユーザー詳細ページ</h3>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-3 mb-2 d-flex justify-content-center align-items-center">
+      <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size: "150x150", class: "mb-2" %>
+      </div>
+      <div class="col-md-3 mb-2 d-flex justify-content-center align-items-center">
+        <%= @user.username %>
+      </div>
+      <div class="col-md-6 mb-2 d-flex justify-content-center align-items-center">
+        <%= simple_format @user.profile %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mt-5 justify-content-center">
+    <h3>投稿一覧</h3>
   </div>
+  <% @user.bikes.each do |bike| %>
+    <div class="row mt-5 justify-content-center">
+      <div class="col-md-6 order-md-1 mb-2 d-flex justify-content-center align-items-center">
+        <%= link_to bike_path(bike) do %>
+          <%= attachment_image_tag bike, :image, size: "500x500", class: "img-fluid" %>
+        <% end %>
+      </div>
+      <div class="col-md-4 order-md-3 mb-2 d-flex justify-content-center align-items-center">
+        <%= link_to bike.title, bike_path(bike) %>
+      </div>
+      <div class="col-md-2 order-md-4 mb-2 d-flex justify-content-center align-items-center">
+        <% if current_user.already_favorited?(bike) %>
+          <%= link_to bike_favorites_path(bike), method: :delete do %>
+            <i class="fas fa-heart"></i>
+          <% end %>
+          <%= bike.favorites.count %>
+        <% else %>
+          <%= link_to bike_favorites_path(bike), method: :post do %>
+            <i class="far fa-heart"></i>
+          <% end %>
+          <%= bike.favorites.count %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="columns is-centered">
-          <div class="column is-4">
-            <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
-              <%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no-image.png", class: "profile_image is-rounded" %>
-            </figure>
-          </div>
-          <div class="column is-8">
-            <table class="table is-fullwidth">
-              <tr>
-                <td class="is-size-4">
-                  <strong><%= @user.username %></strong>
-                </td>
-                <% if @user.id == current_user.id %>
-                <td class="is-size-4">
-                  <%= @user.email %>
-                </td>
-                <td>
-                    <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
-                </td>
-                <% end %>
-              </tr>
-            </table>
-            <table class="table is-fullwidth">
-              <tr>
-                <td>
-                  <%= @user.profile %>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <% @user.bikes.each do |bike| %>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= link_to bike_path(bike) do %>
-                  <%= attachment_image_tag bike, :image, size: "500x500", fallback: "no-image.png" %>
-                <% end %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-content">
-                  <%= link_to bike_path(bike), class: "panel-block" do %>
-                    <span class="panel-icon">
-                      <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-                    この自転車を見る
-                  <% end %>
-                  <% if @user.id == current_user.id %>
-                    <%= link_to edit_bike_path(bike), class: "panel-block" do %>
-                      <span class="panel-icon">
-                        <i class="fas fa-edit"></i>
-                      </span>
-                      この自転車の詳細を編集する
-                    <% end %>
-                    <%= link_to bike_path(bike), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
-                      <span class="panel-icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                      この自転車を削除する
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="content">
-                <time><%= bike.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</section>
+

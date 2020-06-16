@@ -1,53 +1,55 @@
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-6 mx-auto">
-      <div class="card">
-        <div class="card-body bike-show-card">
-          <div class="card-img-top">
-            <%= attachment_image_tag @bike, :image, size: "400x400", class: "img-fluid" %>
-          </div>
-          <h5 class="card-title"><%= @bike.title %></h5>
-          <h6 class="card-subtitle">自転車のパーツ</h6>
-          <p class="card-text"><%= simple_format @bike.body %></p>
-          <p class="card-text">
-            <small class="text-muted">更新日:<%= @bike.updated_at.strftime("%Y-%m-%d") %></small>
-          </p>
-          <% if current_user.already_favorited?(@bike) %>
-            <%= link_to bike_favorites_path(@bike), method: :delete do %>
-              <i class="fas fa-heart"></i>
-            <% end %>
-          <% else %>
-            <%= link_to bike_favorites_path(@bike), method: :create do %>
-              <i class="far fa-heart"></i>
-            <% end %>
-          <% end %>
-          <%= @bike.favorites.count %>
+  <div class="row justify-content-center">
+    <h3 class="h3">自転車の詳細</h3>
+  </div>
 
-          <% if @bike.user.id == current_user.id %>
-            <%= link_to "編集画面へ", edit_bike_path(@bike), class: "btn btn-success" %>
-            <%= link_to "削除する", bike_path(@bike), method: :delete, class: "btn btn-danger" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card">
-        <h5 class="card-title">
-          <%= link_to @bike.user.username, user_path(@bike.user) %>
-        </h5>
-        <div class="card-block">
-          <p class="control">
-            <%= @bike.user.profile %>
-          </p>
-        </div>
-        <%= link_to user_path(@bike.user), class: "panel-block" do %>
-        <span class="card-icon">
-          <i class="fas fa-user" aria-hidden="true"></i>
-        </span>
-        <%= @bike.user.username %>さんのページへ
+  <div class="row mt-5 justify-content-center">
+    <div class="col-lg-8 ">
+      <%= attachment_image_tag @bike, :image, size: "500x500", class: "img-fluid rounded mx-auto d-block" %>
+      <h5 class="mt-5">自転車の車種・名前</h5>
+      <h4><%= @bike.title %></h4>
+      <h5 class="mt-5">自転車の詳細・パーツ名</h5>
+      <h4><%= simple_format @bike.body%></h4>
+      <% if current_user.already_favorited?(@bike) %>
+        <%= link_to bike_favorites_path(@bike), method: :delete do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+        <%= @bike.favorites.count %>
+      <% else %>
+        <%= link_to bike_favorites_path(@bike), method: :post do %>
+          <i class="far fa-heart"></i>
+        <% end %>
+        <%= @bike.favorites.count %>
       <% end %>
-      </div>
+      <div class="mb-2"><small class="mb-2">更新日: <%= @bike.updated_at.strftime("%Y-%m-%d") %></small></div>
+      <% if @bike.user.id == current_user.id %>
+        <%= link_to "編集画面へ", edit_bike_path(@bike), class: "btn btn-success" %>
+        <%= link_to "削除する", bike_path(@bike), method: :delete, class: "btn btn-danger ml-2" %>
+      <% end %>
+    </div>
+          
+
+    <div class="col-lg-4 mx-auto d-flex justify-content-center align-items-center">
+      <div class="row mt-5 justify-content-center">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <%= link_to user_path(@bike.user) do %>
+            <%= attachment_image_tag @bike.user, :profile_image, fallback: "no-image.png",size: "150x150", class: "mb-2" %>
+          <% end %>
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <%= link_to @bike.user.username, user_path(@bike.user) %>
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <%= @bike.user.profile %>
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <%= link_to user_path(@bike.user), class: "panel-block" do %>
+            <span class="card-icon">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </span>
+          <%= @bike.user.username %>さんのページへ
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
