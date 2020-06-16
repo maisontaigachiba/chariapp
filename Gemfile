@@ -31,6 +31,8 @@ group :development, :test do
   gem 'sqlite3', '1.4.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -62,3 +64,4 @@ gem "refile-mini_magick"
 gem "bootstrap", "~> 4.4.1"
 gem "jquery-rails"
 gem "rails-i18n", "~> 6.0"
+gem 'factory_bot_rails'
