@@ -32,4 +32,8 @@ RSpec.describe User, type: :model do
     expect(user.errors[:password]).to include("を入力してください")
   end
 
+  it "is not less than 1 character" do
+    user = FactoryBot.build(:user)
+    expect(user).not_to be_valid
+  end
 end
