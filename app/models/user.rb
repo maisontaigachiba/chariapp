@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :username,  presence: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, on: :update, allow_blank: true
+  validates :password_confirmation, presence: true, on: :update, allow_blank: true
   validates :email, presence: true, uniqueness: true
   attachment :profile_image
   has_many :bikes, dependent: :destroy

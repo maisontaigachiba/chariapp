@@ -15,6 +15,10 @@
  */
  @import "bootstrap";
 
+.min-height {
+  min-height: 100vh;
+}
+
  .notification:not(:last-child) {
    margin-bottom: 0; 
  }
@@ -34,10 +38,31 @@
   border-color: rgba(0,0,0,0);
 }
 
+.top-page{
+  height: 50vh;
+}
 
-.jumbotron {
+.jumbotron{
+  padding-top: 20%;
+  padding-bottom: 20%;
+  min-height: 300px;
   background-image: url("toppage.jpeg");
   background-size: cover;
-  background-position: center 60%;
-  height: 100%;
+  p {
+    letter-spacing: 0.5em;
+  }
 }
+
+.jumbotron-container {
+  background:rgba(255, 255, 255, 0.8);
+}
+
+footer{
+  height: 40px;
+    p{
+    color: white;
+    display: inline-block;
+    margin-left: 1em;
+  }
+}
+
