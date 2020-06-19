@@ -7,5 +7,4 @@ Rails.application.routes.draw do
   resources :bikes do
     resource :favorites, only: [:create, :destroy]
   end
-  get '*path', controller: 'application', action: 'render_404'
 end
