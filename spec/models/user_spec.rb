@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is not less than 1 character" do
-    user = FactoryBot.build(:user)
+    user = FactoryBot.build(:user, username: nil)
     expect(user).not_to be_valid
   end
 end
